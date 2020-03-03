@@ -58,9 +58,10 @@ class UsuarioController{
         $usuario->nombre = DB::escape($_POST['nombre']);
         $usuario->apellido1 = DB::escape($_POST['apellido1']);
         $usuario->apellido2 = DB::escape($_POST['apellido2']);
-        $usuario->privilegio = intval($_POST['privilegio']);
-        $usuario->administrador = empty($_POST['administrador'])? 0 : 1;
+        $usuario->privilegio=empty($_POST['privilegio'])? 0: intval($_POST['privilegio']);
+        $usuario->administrador = empty($_POST['administrador'])? 0 : intval($_POST['administrador']);
         $usuario->email = DB::escape($_POST['email']);
+        $usuario->bloqueado=empty($_POST['bloqueado'])? 0: intval($_POST['bloqueado']); 
           
         if(!$usuario->guardar()) 
             throw new Exception("No se pudo guardar $usuario->usuario");
@@ -114,7 +115,7 @@ class UsuarioController{
         $usuario->privilegio = intval($_POST['privilegio']);
         $usuario->administrador = empty($_POST['administrador'])? 0 : 1;
         $usuario->email = DB::escape($_POST['email']);
-        
+        $usuario->bloqueado = intval($_POST['bloqueado']);
         //la clave solamente cambia si se indica una nueva
         if(!empty($_POST['clave']))  
             $usuario->clave = md5($_POST['clave']);

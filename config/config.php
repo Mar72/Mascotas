@@ -9,7 +9,7 @@
     define('TEMPLATE','Basic');
     
     // PARAMETROS DE CONFIGURACION BDD 
-    define('DB_HOST','83.247.137.2');    // host
+    define('DB_HOST','localhost');    // host
     define('DB_USER','alumne');       // usuario
     define('DB_PASS','');             // password
     define('DB_NAME','ej_mascotas');   // base de datos

@@ -6,7 +6,7 @@
         // PROPIEDADES
         public $id=0, $usuario='', $clave='', $nombre='', $apellido1='', $apellido2='',
                $privilegio=0, $administrador=0, $email='', 
-               $imagen='', $created_at='', $updated_at='';
+               $imagen='', $created_at='', $updated_at='',$bloqueado=0; 
         
                
        // Método que usaremos para comprobar el login. 
@@ -39,13 +39,13 @@
        public function guardar(){
            
            $consulta="INSERT INTO usuarios(
-                          usuario, clave, nombre, apellido1, apellido2,
-                          privilegio, administrador, email)
+                          usuario, clave, nombre, apellido1, apellido2,email,
+                          privilegio,administrador,bloqueado)
                        VALUES(
                           '$this->usuario','$this->clave', '$this->nombre',
                           '$this->apellido1', '$this->apellido2',
-                           $this->privilegio, $this->administrador, '$this->email')";
-                           
+                          '$this->email',$this->privilegio,$this->administrador,$this->bloqueado)";
+                          
            return DB::insert($consulta); //conectar y ejecutar
        }
        
@@ -85,7 +85,8 @@
                           apellido2='$this->apellido2', 
                           privilegio=$this->privilegio,
                           administrador=$this->administrador,
-                          email='$this->email'
+                          email='$this->email',
+                          bloqueado=$this->bloqueado
                         WHERE id=$this->id";
         
             return DB::update($consulta);
