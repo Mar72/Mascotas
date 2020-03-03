@@ -13,15 +13,15 @@ USE ej_mascotas;
 -- creación de la tabla usuaris 
 CREATE TABLE usuarios(
   id int(11) NOT NULL PRIMARY KEY auto_increment,
-  user varchar(32) NOT NULL UNIQUE KEY,
-  password varchar(32) NOT NULL,
+  usuario varchar(32) NOT NULL UNIQUE KEY,
+  clave varchar(32) NOT NULL,
   nombre varchar(32) NOT NULL,
   apellido1 varchar(32) NOT NULL,
   apellido2 varchar(32) NOT NULL,
   poblacion varchar(32) NOT NULL,
   cp char(5) NOT NULL,
   privilegio int (11) NOT NULL DEFAULT '0',
-  admin tinyint(1) NOT NULL DEFAULT '0',
+  administador tinyint(1) NOT NULL DEFAULT '0',
   email varchar(128) NOT NULL,
   imagen varchar(512) DEFAULT NULL, 
   created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
