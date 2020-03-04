@@ -14,7 +14,7 @@
     		?>  
     		
     		<h2>Bienvenido a nuestra WebMascotas</h2>
-    		<?php   		  
+    		  		  
     		
     		<?php 
     		  (TEMPLATE)::footer();
