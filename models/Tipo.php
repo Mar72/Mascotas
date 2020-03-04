@@ -1,9 +1,10 @@
+<?php 
 class Tipo{
   //PROPIEDADES
   public $id=0, $nombre='',$descripcion='';
   
   //recuperar un tipo por su id
-  public static function get(int $id=0)?Tipo{
+  public static function get(int $id=0){
      $consulta = "SELECT * FROM tipos WHERE id=$id";
      return DB::select($consulta, self::class);
   }
