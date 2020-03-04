@@ -17,6 +17,7 @@
         			<li><a href="/contacto">Contactar</a></li>
         	
         			<li><a href="/mascota/list">Ver mascotas</a>
+        			<li><a href="/mascota/listUser/<?=$usuario->id?>">Ver sus mascotas</a>
         		</ul>
         		
         		<?php if(Login::isAdmin()){?>

@@ -1,4 +1,11 @@
-<h2>Lista de mascotas</h2>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Lista sus mascotas</title>
+	</head>
+	<body>
+		<h2>Lista de mascotas de un usuario</h2>
 
 <table border="1">
 	<tr>
@@ -38,3 +45,5 @@
                
     }?>
 </table>
+	</body>
+</html>
