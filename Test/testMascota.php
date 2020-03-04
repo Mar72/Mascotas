@@ -2,7 +2,7 @@
 <?php
 include '../config/config.php';
 include '../libraries/DB.php';
-include '../model/Mascota.php';
+include '../models/Mascota.php';
 
 // comprobación del método guardar()
 echo "<h2>guardar()</h2>";
@@ -10,12 +10,12 @@ echo "<h2>guardar()</h2>";
 $mascota = new Mascota();
 $mascota->nombre = 'Pirata';
 $mascota->sexo = 'M';
-$mascota->biografia = ''Me encantan los huesos;
+$mascota->biografia = 'Me encantan los huesos';
 $mascota->fechaNacimiento = '2019/10/7';
 $mascota->fechaFallecimiento='';
 $mascota->idUsuario = 3;
 $mascota->idRaza=1;
-echo $mascota->guardar() ? 'Èxito' : 'Error';
+echo $mascota->guardar() ? 'Éxito' : 'Error';
 
 // comprobación del método get()
 echo "<h2>get()</h2>";
@@ -24,13 +24,18 @@ var_dump(Mascota::get());
 echo "</pre>";
 
 // comprobación del método getMascota($id)
-echo "<h2>getMascota($id)</h2>";
+echo "<h2>getMascota</h2>";
 echo "<pre>";
-var_dump(Mascota::getMascota(1));
+var_dump(Mascota::getMascota(4));
+echo "</pre>";
+
+echo "<h2>getUSer</h2>";
+echo "<pre>";
+var_dump(Mascota::getUser(3));
 echo "</pre>";
 
 // comprobación del método getFiltered()
-echo "<h2>getFiltered()</h2>";
+echo "<h2>getFiltered</h2>";
 echo "<pre>";
 var_dump(Mascota::getFiltered('nombre', 'Pirata'));
 echo "</pre>";
@@ -58,7 +63,7 @@ var_dump(Mascota::getFotos(1));
 echo "<pre>";
 
 // comprobación del método borrar()
-echo "<h2>borrar()</h2>";
-$mascotas = Mascota::getFiltered('nombre', 'Pirata');
-echo Mascota::borrar($anuncios[0]->id) ? 'Éxito' : 'Error'; 
+//echo "<h2>borrar()</h2>";
+//$mascotas = Mascota::getFiltered('nombre', 'Pirata');
+//echo Mascota::borrar($anuncios[0]->id) ? 'Éxito' : 'Error'; 
 

@@ -3,7 +3,7 @@ class Mascota {
     
     // PROPIEDADES
     public $id = 0, $nombre = '', $sexo = 'M', $biografia = '', $fechaNacimiento = '', 
-    $fechaFallecimiento = '', $idUsuario=0, $idRaza = 0;
+    $fechaFallecimiento = NULL, $idUsuario=0, $idRaza = 0;
     
     // MÉTODOS DEL CRUD
     // recuperar todas las mascotas
@@ -25,17 +25,20 @@ class Mascota {
     }
     public static function getUser($idu):array{
         $consulta= "SELECT u.nombre, u.apellido1, u.apellido2, m.* 
-                    FROM usuarios u LEFT JOIN mascotas m
+                    FROM usuarios u INNER JOIN mascotas m
                     WHERE u.id=m.idUsuario";
+echo $consulta;        
        return DB::selectAll($consulta, self::class);
     }
 
     public function guardar()
     { // insertar una nueva mascota
-        $consulta = "INSERT INTO mascota (nombre,sexo,biografía,
+        $consulta = "INSERT INTO mascotas (nombre,sexo,biografia,
                      fechaNacimiento, fechaFallecimiento, idUsuario, idRaza)
-                   VALUES('$this->nombre','$this->sexo',$this->biografia,
-                           '$this->fechaNacimiento', $this->idUsuario, $this->idRaza)";
+                   VALUES('$this->nombre','$this->sexo','$this->biografia',
+                           '$this->fechaNacimiento', '$this->fechaFallecimiento',
+                            $this->idUsuario, $this->idRaza)";
+echo $consulta;        
         return DB::insert($consulta, self::class);
     }
 
@@ -56,10 +59,21 @@ class Mascota {
                       biografia='$this->biografia',
                       fechaNacimiento='$this->fechaNacimiento',
                       fechaFallecimiento='$this->fechaFallecimiento',
-                      idUsuario=$this->idUsuario
+                      idUsuario=$this->idUsuario,
+                      idRaza=$this->idRaza
                    WHERE id=$this->id";
 
         return DB::update($consulta);
     }
     
+    // recuperar mascotas con un filtro avanzado 
+    public static function getFiltered(string $campo = 'nombre', string $valor = '', string $orden = 'id', string $sentido = 'ASC'): array
+    {
+        $consulta = "SELECT m.*, u.nombre, u.email
+               FROM mascotas m INNER JOIN usuarios u 
+               WHERE $campo LIKE '%$valor%' AND m.idusuari=u.id
+               ORDER BY $orden $sentido";
+        
+        return DB::selectAll($consulta, self::class);
+    }
 }
