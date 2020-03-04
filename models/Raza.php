@@ -15,7 +15,7 @@ class Raza{
   }
   
   public function getRazaTipo (){
-     $consulta = "SELECT r.nombre, t.nombre 
+     $consulta = "SELECT r.nombre as raza, t.nombre as tipo 
                   FROM razas r INNER JOIN tipos t
                   WHERE r.idTipo=t.id";
   }
