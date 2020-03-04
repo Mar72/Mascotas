@@ -18,7 +18,10 @@
         			<li><a href="/contacto">Contactar</a></li>
         	
         			<li><a href="/mascota/list">Ver mascotas</a>
-        			<li><a href="/mascota/listUser/<?=$usuario->id?>">Ver sus mascotas</a>
+                    <?php if(!empty($usuario) && !Login::isAdmin()) {?>         			
+        			  <li><a href="/mascota/listUser/<?=$usuario->id?>">Ver sus mascotas</a>
+        			  <li><a href="/mascota/create">Añadir mascota</a>
+        			<?php }?>  
         		</ul>
         		
         		<?php if(Login::isAdmin()){?>

@@ -13,6 +13,12 @@ class Raza{
 	$consulta = "SELECT * FROM mascotas WHERE idRaza=$this->id";
 	return DB::select($consulta,'Mascota');  
   }
+  
+  public function getRazaTipo (){
+     $consulta = "SELECT r.nombre, t.nombre 
+                  FROM razas r INNER JOIN tipos t
+                  WHERE r.idTipo=t.id";
+  }
   //nueva foto
   public function guardar(){
      $consulta="INSERT INTO razas (id, nombre, descripcion,idTipo)
