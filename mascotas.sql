@@ -21,7 +21,7 @@ CREATE TABLE usuarios(
   poblacion varchar(32) NOT NULL,
   cp char(5) NOT NULL,
   privilegio int (11) NOT NULL DEFAULT '0',
-  administador tinyint(1) NOT NULL DEFAULT '0',
+  administrador tinyint(1) NOT NULL DEFAULT '0',
   email varchar(128) NOT NULL,
   imagen varchar(512) DEFAULT NULL, 
   created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
