@@ -10,7 +10,7 @@
     
     <?php foreach($mascotas as $mascota){
             echo "<tr>";
-            echo "<td>$mascota->nombre</td>";
+            echo "<td>$mascota->nombre</td>"; 
             echo "<td>$mascota->sexo</td>";
             echo "<td>$mascota->editorial</td>";
             echo "td>";
