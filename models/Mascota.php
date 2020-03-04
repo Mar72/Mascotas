@@ -26,8 +26,7 @@ class Mascota {
     public static function getUser($idu):array{
         $consulta= "SELECT u.nombre, u.apellido1, u.apellido2, m.* 
                     FROM usuarios u INNER JOIN mascotas m
-                    WHERE u.id=m.idUsuario";
-echo $consulta;        
+                    WHERE u.id=m.idUsuario"; 
        return DB::selectAll($consulta, self::class);
     }
 

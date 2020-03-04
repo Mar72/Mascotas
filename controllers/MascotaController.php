@@ -21,13 +21,11 @@ class MascotaController{
     // operacion para listar todas  las mascotas
     public function listUser($idu){
         $usuario = Login::get();
-  echo $usuario->id;
-  echo $idu;
+
         if(!empty($usuario)&&($usuario->id!=$idu))
             throw new Exception ('No estas registrado para ver tus mascotas');
         // recuperar la lista de mascotas
-        $mascotas = Mascota::getUser();
-        
+        $mascotas = Mascota::getUser($idu);        
         
         //cargar la vista que muesta el listado
         include 'views/mascota/listaUser.php';

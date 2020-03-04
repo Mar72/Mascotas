@@ -11,6 +11,7 @@
         
         // pone el nav
         public static function nav(){?>
+           <?php $usuario=Login::get();?>
         	<nav id="menu">
                 <ul>
         			<li><a href="/">Inicio</a></li>
