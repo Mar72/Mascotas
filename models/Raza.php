@@ -1,9 +1,10 @@
+<?php 
 class Raza{
   //PROPIEDADES
   public $id=0, $nombre='',$descripcion='',$idTipo=0;
   
   //recuperar una raza por su id
-  public static function get(int $id=0)?Raza{
+  public static function get(int $id=0){
      $consulta = "SELECT * FROM razas WHERE id=$id";
      return DB::select($consulta, self::class);
   }
@@ -18,6 +19,8 @@ class Raza{
      $consulta = "SELECT r.nombre as raza, t.nombre as tipo 
                   FROM razas r INNER JOIN tipos t
                   WHERE r.idTipo=t.id";
+
+     return DB::selectAll($consulta, self::class);
   }
   //nueva foto
   public function guardar(){

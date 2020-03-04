@@ -37,7 +37,7 @@ class Mascota {
                    VALUES('$this->nombre','$this->sexo','$this->biografia',
                            '$this->fechaNacimiento', '$this->fechaFallecimiento',
                             $this->idUsuario, $this->idRaza)";
-       
+ echo $consulta;      
         return DB::insert($consulta, self::class);
     }
 

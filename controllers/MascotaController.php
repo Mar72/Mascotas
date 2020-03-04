@@ -48,9 +48,50 @@ class MascotaController{
     }
     //GUARDAR SE HACE EN DOS PASOS
     
-    //PASO 1: muestra el formulario de nuevo libro
+    //PASO 1: muestra el formulario de nueva mascota
     public function create(){
+        
+        $usuario= Login::get();
+        if (empty($usuario) || Login::isAdmin())
+            throw new Exception ("No estás registrado para subir una mascota");
+        
+        $razas = Raza::getRazaTipo();
+        
         include 'views/mascota/nuevo.php';
+    }
+    // PASO 2: guarda la nueva mascota
+    public function store(){
+        
+        //comprueba que llegue el formulario con los datos
+            if(empty($_POST['guardar']))
+                throw new Exception('No se recibieron datos');
+        
+            $mascota = new Mascota(); // crea una nueva mascota
+            
+            //recupera los datos del formularoi que llegan por POST
+            $mascota->nombre = $_POST['nombre'];
+            $mascota->sexo = $_POST['sexo'];
+            $mascota->biografia = $_POST['biografia'];
+            $mascota->fechaNacimiento = $_POST['fechaNacimiento'];            
+            if (empty($_POST['fechaFallecimiento'])) $mascota->fechaFallecimiento=NULL;
+            else $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
+            $mascota->idUsuario = $_POST['idUsuario'];
+            $mascota->idRaza = $_POST['raza'];
+            
+                  
+            if(!$mascota->guardar()) //gaurda la mascota en BDD
+                 throw new Exception("No se pudo guardar $mascota->nombre");
+            
+            // para subir la imagen
+            if(Upload::LlegaarFichero('imagen'))
+                $fotos->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
+            
+            if(!$foto->guardar()) //gaurda la foto en BDD 
+                throw new Exception("No se pudo guardar $foto->fichero"); 
+                         
+                 
+            $mensaje="Guardado de mascota $mascota->nombre.";
+            include 'view/exito.php'; // muestra la vista de éxito
     }
 }
     
