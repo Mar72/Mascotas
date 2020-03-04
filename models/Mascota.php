@@ -19,7 +19,7 @@ class Mascota {
     }
     public static function getFotos($idm):array{
         $consulta= "SELECT m.*, f.id, f.fichero, f.ubicacion 
-                    FROM mascotas m LEFT JOIN fotos f
+                    FROM mascotas m INNER JOIN fotos f
                     WHERE m.id=f.idmascota";
        return DB::selectAll($consulta, self::class);
     }
