@@ -31,6 +31,7 @@
         <?php  } 
     } else echo "Sin fotos";?>
         
+        <a href="/mascota/createFotos/<?=$mascota->id?>">Subir fotos</a>
         <a href="/mascota/edit<?=$mascota->id?>">Editar mascota</a> -
         <a href="/mascota/delete<?=$mascota->id?>">Borrar mascota</a> -
         <a href="/mascota/list">Lista de mascotas</a>

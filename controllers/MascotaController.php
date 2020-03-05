@@ -59,6 +59,7 @@ class MascotaController{
       
         include 'views/mascota/nuevo.php';
     }
+    
     // PASO 2: guarda la nueva mascota
     public function store(){
         
@@ -76,31 +77,47 @@ class MascotaController{
             $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
             if (Login::hasPrivilege(500)) $mascota=intval($_POST['idUsuario']); 
             else  $mascota->idUsuario = Login::get()->id;
-            $mascota->idRaza = intval($_POST['razaTipo']); 
-            //$mascota->idRaza=2;
- echo "idrazaTipo<br>"; 
- var_dump($_POST['razaTipo']);                         
+            $mascota->idRaza = intval($_POST['razaTipo']);                            
                   
             if(!$mascota->guardar()) //gaurda la mascota en BDD
                   throw new Exception("No se pudo guardar $mascota->nombre");
-            $mascotaR = Mascota::getFiltered('nombre', DB::escape($_POST['nombre']));
-echo 'mascotaR<br>';             
-var_dump($mascotaR);
-//            if(!empty($_POST['fichero'])){ 
-              // $foto = new Foto(); //crea una nueva foto
-              // $foto->ubicacion=DB::escape($_POST['ubicacion']);
-              // $foto->idmascotas=intval($mascotaR[0]->id);
-                       
-              //  para subir la imagen
-              // if(Upload::llegaFichero('imagen'))
-                 //$foto->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
+            // $mascotaR = Mascota::getFiltered('nombre', DB::escape($_POST['nombre']));
             
-              // if(!$foto->guardar()) //guarda la foto en BDD  
-              //  throw new Exception("No se pudo guardar $foto->fichero"); 
-                         
-//            }
-            $mensaje="Guardado de mascota $mascota->nombre.";
-            include 'view/exito.php'; // muestra la vista de éxito
-    }
+    
+}
+  public function createFotos($idm){ 
+    
+    //$usuario= Login::get();
+    $mascota = Mascota::getMascota($idm); 
+    // if (empty($usuario) || Login::hasPrivilege(500))
+    //    throw new Exception ("No estás registrado para subir fotos");
+    
+    if ($mascota->idUsuario!=Login::get()->id)
+        throw new Exception ("No tienes permiso para subir fotos");    
+        
+        include 'views/mascota/addFotos.php'; 
+  }
+
+  public function storeFotos($id){   //Sube fotos para mascota id
+    $mascota = Mascota::getMascota($id);
+    if ($mascota->idUsuario!=Login::get()->id) 
+         throw new Exception ("No tienes permiso para subir fotos");
+    if(!empty($_POST['enviar'])){ 
+         $foto = new Foto(); //crea una nueva foto
+         $foto->ubicacion=DB::escape($_POST['ubicacion']);
+         $foto->idmascotas=$id;
+        
+        //  para subir la imagen
+         foreach($_FILES as $fichero){
+           if(Upload::llegaFichero('imagen'))
+           $foto->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
+            
+           if(!$foto->guardar()) //guarda la foto en BDD
+              throw new Exception("No se pudo guardar $foto->fichero");
+         }
+                        }
+        $mensaje="Guardado de fotos de mascota $mascota->nombre.";
+        include 'views/exito.php'; // muestra la vista de éxito
+  }
 }
     

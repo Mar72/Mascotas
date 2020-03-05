@@ -20,7 +20,7 @@
 			<label>fecha nacimiento</label>
 			<input type="text" name="fechaNacimiento"><br>
 			<label>fecha fallecimiento</label>
-			<input type="text" name="fechaFallecimineto"><br>
+			<input type="text" name="fechaFallecimiento"><br>
 			<?php if (Login::hasPrivilege(500)) {?> 
   				<label>idUsuario</label>
 				<input type="text" name="idUsuario"><br>
@@ -31,11 +31,7 @@
 				        echo "<option value='$raza->id' >$raza->id $raza->tipo $raza->raza </option>";
 				?>
 			</select><br>
-			<label>Foto Mascota</label>
-			<input type="file" name="imagen"><br>
-			<label>Ubicación: </label>
-			<input type="text" name="ubicacion"><br>
-			 
+			
 			<input type="submit" name="guardar" value="Guardar">
 		</form>
 		
