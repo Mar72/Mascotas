@@ -18,9 +18,9 @@ class Mascota {
         return DB::select($consulta, self::class); // ejecutar y retornar el resultado
     }
     public static function getFotos($idm):array{
-        $consulta= "SELECT m.*, f.id, f.fichero, f.ubicacion 
+        $consulta= "SELECT m.*, f.id, f.fichero, f.ubicacion, f.idmascota 
                     FROM mascotas m INNER JOIN fotos f
-                    WHERE m.id=f.idmascota";
+                    WHERE m.id=f.idmascota AND m.id=$idm";
        return DB::selectAll($consulta, self::class);
     }
     public static function getUser($idu):array{
@@ -32,12 +32,21 @@ class Mascota {
 
     public function guardar()
     { // insertar una nueva mascota
-        $consulta = "INSERT INTO mascotas (nombre,sexo,biografia,
-                     fechaNacimiento, fechaFallecimiento, idUsuario, idRaza)
-                   VALUES('$this->nombre','$this->sexo','$this->biografia',
-                           '$this->fechaNacimiento', '$this->fechaFallecimiento',
-                            $this->idUsuario, $this->idRaza)";
- echo $consulta;      
+        if (empty($this->fechaFallecimiento)) {
+           $consulta = "INSERT INTO mascotas (nombre,sexo,biografia,
+                        fechaNacimiento, fechaFallecimiento, idUsuario, idRaza)
+                        VALUES('$this->nombre','$this->sexo','$this->biografia',
+                               '$this->fechaNacimiento', NULL,      
+                                $this->idUsuario, $this->idRaza)";
+        }
+        else {
+            $consulta = "INSERT INTO mascotas (nombre,sexo,biografia,
+                        fechaNacimiento, fechaFallecimiento, idUsuario, idRaza)
+                        VALUES('$this->nombre','$this->sexo','$this->biografia',
+                               '$this->fechaNacimiento', '$this->fechaFallecimiento', 
+                                $this->idUsuario, $this->idRaza)";
+        }
+    
         return DB::insert($consulta, self::class);
     }
 
@@ -51,8 +60,20 @@ class Mascota {
 
     public function actualizar()
     { // actualizar una mascota
+        if (empty($this->fechaFallecimiento)) {
       // preparar consulta
-        $consulta = "UPDATE mascotas SET
+          $consulta = "UPDATE mascotas SET
+                       nombre='$this->nombre',
+                       sexo='$this->sexo',
+                       biografia='$this->biografia',
+                       fechaNacimiento='$this->fechaNacimiento',
+                       fechaFallecimiento=NULL,
+                       idUsuario=$this->idUsuario,
+                       idRaza=$this->idRaza
+                   WHERE id=$this->id";
+        }
+        else {
+            $consulta = "UPDATE mascotas SET
                       nombre='$this->nombre',
                       sexo='$this->sexo',
                       biografia='$this->biografia',
@@ -61,16 +82,16 @@ class Mascota {
                       idUsuario=$this->idUsuario,
                       idRaza=$this->idRaza
                    WHERE id=$this->id";
-
+        }
         return DB::update($consulta);
     }
     
-    // recuperar mascotas con un filtro avanzado 
-    public static function getFiltered(string $campo = 'nombre', string $valor = '', string $orden = 'id', string $sentido = 'ASC'): array
+    // recuperar mascotas con un filtro avanzado
+    public static function getFiltered(string $campo = 'nombre', string $valor = '', string $orden = 'id', string $sentido = 'ASC'): array 
     {
-        $consulta = "SELECT m.*, u.nombre, u.email
-               FROM mascotas m INNER JOIN usuarios u 
-               WHERE $campo LIKE '%$valor%' AND m.idusuari=u.id
+        $consulta = "SELECT m.*
+               FROM mascotas m 
+               WHERE $campo LIKE '%$valor%'
                ORDER BY $orden $sentido";
         
         return DB::selectAll($consulta, self::class);

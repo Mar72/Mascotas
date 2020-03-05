@@ -2,9 +2,12 @@
 <html>
 	<head>
 		<meta charset="${encoding}">
-		<title>Insert title here</title>
+		<title>Detalles de una mascota</title>
 	</head>
 	<body>
+	    <?php 
+	    Basic::header();
+	    Basic::nav();?>
        	<h2>Detalles de mascota</h2>
         <h3><?=$mascota->nombre?></h3>
         
@@ -15,17 +18,22 @@
         <p><b>idUsuario:</b> <?=$mascota->idUsuario?></p>
         <p><b>idRaza:</b> <?=$mascota->idRaza?></p>
 
-<?php  var_dump($fotos);
+<?php  
     if(sizeof($fotos)>0) {
-            foreach($fotos as $foto){?> 
-              <p><b>Fichero:</b> <?=$foto->fichero?><p>  
+            foreach($fotos as $foto){?>  
+                <figure class="portada">
+	             <?php echo "<img height='100' src='/$foto->fichero' alt='foto'>";
+                 ?>   
+	           </figure>
+               
               <p><b>Ubicacion:</b><?=$foto->ubicacion?></p> 
-              <p><b>idmascota:</b><?=$foto->idmascota?></p>          
-        <?php }
-    }?>
+              <p><b>id mascota:</b><?=$foto->idmascota?></p>          
+        <?php  } 
+    } else echo "Sin fotos";?>
         
         <a href="/mascota/edit<?=$mascota->id?>">Editar mascota</a> -
         <a href="/mascota/delete<?=$mascota->id?>">Borrar mascota</a> -
         <a href="/mascota/list">Lista de mascotas</a>
+        <?php Basic::footer();?>
 	</body>
 </html>

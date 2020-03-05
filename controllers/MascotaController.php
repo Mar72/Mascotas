@@ -42,7 +42,7 @@ class MascotaController{
         // comprobar que la mascota se haya recuperado correctamente de la BDD
         if(!$mascota)
             throw new Exception("No se ha encontrado la mascota $id.");
-        
+        $fotos = Mascota::getFotos($id);  
        // cargar la vista de detalles
        include 'views/mascota/detalles.php';
     }
@@ -56,7 +56,7 @@ class MascotaController{
             throw new Exception ("No estás registrado para subir una mascota");
         
         $razas = Raza::getRazaTipo();
-        
+      
         include 'views/mascota/nuevo.php';
     }
     // PASO 2: guarda la nueva mascota
@@ -69,27 +69,36 @@ class MascotaController{
             $mascota = new Mascota(); // crea una nueva mascota
             
             //recupera los datos del formularoi que llegan por POST
-            $mascota->nombre = $_POST['nombre'];
-            $mascota->sexo = $_POST['sexo'];
-            $mascota->biografia = $_POST['biografia'];
-            $mascota->fechaNacimiento = $_POST['fechaNacimiento'];            
-            if (empty($_POST['fechaFallecimiento'])) $mascota->fechaFallecimiento=NULL;
-            else $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
-            $mascota->idUsuario = $_POST['idUsuario'];
-            $mascota->idRaza = $_POST['raza'];
-            
+            $mascota->nombre = DB::escape($_POST['nombre']);
+            $mascota->sexo = DB::escape($_POST['sexo']);
+            $mascota->biografia = DB::escape($_POST['biografia']);
+            $mascota->fechaNacimiento = $_POST['fechaNacimiento']; 
+            $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
+            if (Login::hasPrivilege(500)) $mascota=intval($_POST['idUsuario']); 
+            else  $mascota->idUsuario = Login::get()->id;
+            $mascota->idRaza = intval($_POST['razaTipo']); 
+            //$mascota->idRaza=2;
+ echo "idrazaTipo<br>"; 
+ var_dump($_POST['razaTipo']);                         
                   
             if(!$mascota->guardar()) //gaurda la mascota en BDD
-                 throw new Exception("No se pudo guardar $mascota->nombre");
+                  throw new Exception("No se pudo guardar $mascota->nombre");
+            $mascotaR = Mascota::getFiltered('nombre', DB::escape($_POST['nombre']));
+echo 'mascotaR<br>';             
+var_dump($mascotaR);
+//            if(!empty($_POST['fichero'])){ 
+              // $foto = new Foto(); //crea una nueva foto
+              // $foto->ubicacion=DB::escape($_POST['ubicacion']);
+              // $foto->idmascotas=intval($mascotaR[0]->id);
+                       
+              //  para subir la imagen
+              // if(Upload::llegaFichero('imagen'))
+                 //$foto->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
             
-            // para subir la imagen
-            if(Upload::LlegaarFichero('imagen'))
-                $fotos->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
-            
-            if(!$foto->guardar()) //gaurda la foto en BDD 
-                throw new Exception("No se pudo guardar $foto->fichero"); 
+              // if(!$foto->guardar()) //guarda la foto en BDD  
+              //  throw new Exception("No se pudo guardar $foto->fichero"); 
                          
-                 
+//            }
             $mensaje="Guardado de mascota $mascota->nombre.";
             include 'view/exito.php'; // muestra la vista de éxito
     }

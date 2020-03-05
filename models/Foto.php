@@ -1,9 +1,10 @@
+<?php 
 class Foto{
   //PROPIEDADES
   public $id=0, $fichero='',$ubicacion='',$idmascota=0;
   
   //recuperar una foto por su id
-  public static function get(int $id=0)?Foto{
+  public static function get(int $id=0){
      $consulta = "SELECT * FROM fotos WHERE id=$id";
      return DB::select($consulta, self::class);
   }
@@ -15,8 +16,9 @@ class Foto{
   }
   //nueva foto
   public function guardar(){
-     $consulta="INSERT INTO fotos (id, fichero, ubicacion,idmascota)
-                VALUES ($this->id,$this->fichero,$this->ubicacion,$this->idmascota)";
+     $consulta="INSERT INTO fotos (fichero, ubicacion,idmascota)
+                VALUES ('$this->fichero','$this->ubicacion',$this->idmascota)";
+  echo $consulta;
      return DB::insert($consulta);           
   }
   //borrar foto

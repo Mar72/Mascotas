@@ -5,6 +5,9 @@
 		<title>Lista sus mascotas</title>
 	</head>
 	<body>
+	<?php 
+	    Basic::header();
+	    Basic::nav();?>
 		<h2>Lista de mascotas de un usuario</h2>
 
 <table border="1">
@@ -45,5 +48,6 @@
                
     }?>
 </table>
+     <?php Basic::footer();?>
 	</body>
 </html>

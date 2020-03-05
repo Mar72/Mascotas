@@ -37,7 +37,7 @@ echo "</pre>";
 // comprobación del método getFiltered()
 echo "<h2>getFiltered</h2>";
 echo "<pre>";
-var_dump(Mascota::getFiltered('nombre', 'Pirata'));
+var_dump(Mascota::getFiltered('nombre', 'Minino'));
 echo "</pre>";
 
 // comprobación del método actualizar()
