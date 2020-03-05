@@ -9,7 +9,7 @@
 		
 		<form method="post" action="/mascota/destroy">
 			
-			<p>Confiramr el borrado de la mascota <?=$mascosta->nombre?>.</p>
+			<p>Confirmar el borrado de la mascota <?=$mascota->nombre?>.</p>
 			
 			<input type="hidden" name="id" value="<?=$id?>">
 			

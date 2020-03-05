@@ -86,7 +86,7 @@ class MascotaController{
     
 }
   public function createFotos($idm){ 
-    
+   
     //$usuario= Login::get();
     $mascota = Mascota::getMascota($idm); 
     // if (empty($usuario) || Login::hasPrivilege(500))
@@ -98,15 +98,17 @@ class MascotaController{
         include 'views/mascota/addFotos.php'; 
   }
 
-  public function storeFotos($id){   //Sube fotos para mascota id
-    $mascota = Mascota::getMascota($id);
+  public function storeFotos(){   //Sube fotos para mascota id
+    $idm = intval($_POST['idmascota']);
+    $mascota = Mascota::getMascota($idm); 
     $usuario=Login::get();
+
     if ($mascota->idUsuario!=$usuario->id) 
          throw new Exception ("No tienes permiso para subir fotos");
     if(!empty($_POST['enviar'])){ 
          $foto = new Foto(); //crea una nueva foto
          $foto->ubicacion=DB::escape($_POST['ubicacion']);
-         $foto->idmascotas=$id;
+         $foto->idmascota=$mascota->id;
         
         //  para subir la imagen
          foreach($_FILES as $fichero){
@@ -170,5 +172,42 @@ class MascotaController{
       $this->edit($mascota->id);
     
   }
+  //ELIMINAR SE HACE EN DOS PASOS 
+  //(si queremos hacerlo con formulario de confirmación) 
+  
+  //PASO 1: muestra el formulario de confirmación de eliminación 
+  public function delete(int $id=0){
+      //comprueba que me llega el identificador 
+      if(!$id) 
+          throw new Exception("No se indicó la mascota a borrar."); 
+      
+      //recupera la mascota con dicho identificador 
+      $mascota = Mascota::getMascota($id); 
+      
+      //comprueba que la mascota existe 
+      if(!$mascota) 
+          throw new Exception ("No existe la mascota $id.");
+      
+      //ir al formulario de confirmación 
+      include 'views/mascota/borrar.php';
+  }
+  //PASO 2: eliminar la mascota 
+  public function destroy(){
+      //comprueba que llegue el formulario de confirmación 
+      if(empty($_POST['borrar'])) 
+          throw new Exception("No se recibió confirmación"); 
+      
+          //recupera el identificador bía POST
+          $id = intval($_POST['id']); 
+          
+          //intenta borrar la mascota de la BDD 
+          if(Mascota::borrar($id)==false) 
+              throw new Exception("No se pudo borrar"); 
+          
+          //muestra la vista de éxito 
+          $mensaje="Borrado de la mascota $id correcto."; 
+          include 'views/exito.php';  //mostrar éxito
+  }
+  
 }
     
