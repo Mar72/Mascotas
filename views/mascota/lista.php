@@ -21,7 +21,7 @@
 				<th>idRaza</th>
 				<th>Operaciones</th>
     		</tr>
-    		<?php $usuario = Login::get();?>
+    		
     		<?php foreach($mascotas as $mascota){
                  echo "<tr>";
                  echo "<td>$mascota->nombre</td>";  
@@ -34,15 +34,14 @@
                  echo "<td>";
                  echo " <a href='/mascota/show/$mascota->id'>Ver</a>";
             
-                 if(!empty($usuario)){
-                     if  (($mascota->idUsuario == $usuario->id) || Login::hasPrivilege(500)){
+                 // if(!empty($usuario)){
+                   if  (Login::hasPrivilege(500) || ($mascota->idUsuario == Login::get()->id)) {                    
                     
-                    
-                       echo   "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
+                       echo "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
                        echo "- <a href='/mascota/delete/$mascota->id'>Borrar</a>";
                     
                      } 
-                  }
+                  // }
             echo "</td>";
             echo "</tr>";
                

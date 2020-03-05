@@ -83,7 +83,9 @@ class Mascota {
                       idRaza=$this->idRaza
                    WHERE id=$this->id";
         }
+        echo $consulta;
         return DB::update($consulta);
+        
     }
     
     // recuperar mascotas con un filtro avanzado

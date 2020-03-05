@@ -100,7 +100,8 @@ class MascotaController{
 
   public function storeFotos($id){   //Sube fotos para mascota id
     $mascota = Mascota::getMascota($id);
-    if ($mascota->idUsuario!=Login::get()->id) 
+    $usuario=Login::get();
+    if ($mascota->idUsuario!=$usuario->id) 
          throw new Exception ("No tienes permiso para subir fotos");
     if(!empty($_POST['enviar'])){ 
          $foto = new Foto(); //crea una nueva foto
@@ -118,6 +119,56 @@ class MascotaController{
                         }
         $mensaje="Guardado de fotos de mascota $mascota->nombre.";
         include 'views/exito.php'; // muestra la vista de éxito
+  }
+  // ACTUALIZAR SE HACE EN DOS PASOS
+  // PASO 1: muestra e formulario de edicón de una mascota
+  public function edit(int $id=0){
+      // comprobar que llega el id de mascota a editar
+      if(!$id)
+          throw new Exception("No se indicó la mascota.");
+          
+          // recuperar la mascota con dicho identificador
+          $mascota=Mascota::getMascota($id);
+          
+          // comprueba eue la mascota se pudo recuperar de la BDD
+          if(!$mascota)
+              throw new Exception("No exite la mascota $id.");
+              
+              // carga la vistade formulario
+              include 'views/mascota/actualizar.php';
+  }
+  //PASO 2: aplica los cambios a mascota
+  public function update(){
+      
+      //comprueba wue llegue el formulario con los datos
+      if(empty($_POST['actualizar']))
+          throw new Exception('No se recibieron datos');
+      
+      // podemos crear una nueva mscota o recuperae la de BDD,
+      // ha optado por crear una nueva porque me ahorro una consulta.
+      $mascota = new Mascota(); //nuava mascota
+      
+      $mascota->id = intval($_POST['id']); //recfuperar el id vía POST
+      
+      //recuperar el resto de campos
+      $mascota->nombre = $_POST['nombre'];
+      $mascota->sexo = $_POST['sexo'];
+      $mascota->biografia = $_POST['biografia'];
+      $mascota->fechaNacimiento = $_POST['fechaNacimiento'];
+      $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
+      $mascota->idUsuario = $_POST['idUsuario'];
+      $mascota->idRaza = $_POST['idRaza'];
+      
+      // intenta realizar la actualizacion de datos
+      if($mascota->actualizar()===false)
+          throw new Exception("No se pudo actualizar $mascota->nombre");
+      
+      // prepara un mensaje 
+      $GLOBALS['mensaje'] = "Actualización de mascota $mascota->nombre correcta.";
+      
+      // repite la operacion edit, así mantendra el usuario en la vista de edicion.
+      $this->edit($mascota->id);
+    
   }
 }
     
