@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
 		<title>Actualizar datos del usuario <?=$usuario->usuario?></title>
 		<style>
 		  form label{

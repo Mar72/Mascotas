@@ -2,9 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
 		<title>Actualizar</title>
 	</head>
 	<body>
+	<?php 
+	    Basic::header();
+	    Basic::nav();?>
+	    
 		<h2>Formulario de edición</h2>
 		
 		<?=empty($GLOBALS['mensaje'])?"": "<p>". $GLOBALS['mensaje']."</p>"?>
@@ -30,5 +35,7 @@
 		
 		<a href="/mascota/show/<?=$mascota->id?>">Detalles</a> - 
 		<a href="/mascota">Volvel al listado</a>
+		
+	<?php Basic::footer();?>
 	</body>
 </html>

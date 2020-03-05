@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="${encoding}">
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
 		<title>Detalles de una mascota</title>
 	</head>
 	<body>

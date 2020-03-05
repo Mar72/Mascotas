@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="${encoding}">
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
 		<title>Insert title here</title>
 	</head>
 	<body>
