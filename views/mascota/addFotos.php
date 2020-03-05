@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script src='js/InputsVariables.js'></script>
+		<script src='../InputsVariables.js'></script>
+		<link rel="stylesheet" type="text/css" href="../../css/estilo.css" />
 		<title>Sube fotos mascota</title>
 	</head>
 	<body>
@@ -17,8 +18,8 @@
 			<input type="text" name="ubicacion"><br>
 			<input type="hidden" name="idmascota" value="<?= $mascota->id?>"><br>
 			 
-<!-- 			<input type="button" id="mas" onclick="addInput();" value="+">
-            <input type="button" id="menos" onclick="removeInput();" value="-" disabled="disabled"> -->
+ <!-- 			<input type="button" id="mas" onclick="addInput();" value="+">
+            <input type="button" id="menos" onclick="removeInput();" value="-" disabled="disabled"> --> 
             <input type="submit" name="enviar" value="Enviar">
        </form> 
        <?php Basic::footer();?>     

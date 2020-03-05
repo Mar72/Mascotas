@@ -112,6 +112,7 @@ class MascotaController{
         
         //  para subir la imagen
          foreach($_FILES as $fichero){
+
            if(Upload::llegaFichero('imagen'))
            $foto->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
             

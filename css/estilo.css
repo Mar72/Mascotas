@@ -1,0 +1,23 @@
+h1, h2, h3 {
+	color: brown;
+}
+
+table th {
+	background-color: bisque;
+}
+
+table tr:nth-of-type(odd) {
+	background-color: antiquewhite;
+}
+
+p.error {
+	color: red;
+}
+
+p.exito {
+	color: green;
+}
+
+footer {
+	text-align: right;
+}
