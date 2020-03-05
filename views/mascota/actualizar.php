@@ -5,6 +5,10 @@
 		<title>Actualizar</title>
 	</head>
 	<body>
+		<h2>Formulario de edición</h2>
+		
+		<?=empty($GLOBALS['mensaje'])?"": "<p>". $GLOBALS['mensaje']."</p>"?>
+		
 		<form method="post"action="/mascota/update">
     		<input type="hidden" name="id" value="<?=$mascota->id?>">
     		<label>Nombre</label>
