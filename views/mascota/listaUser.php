@@ -36,10 +36,8 @@
             echo "<td>";
             echo " <a href='/mascota/show/$mascota->id'>Ver</a>";
             
-            // if(!empty($usuario)){
-                if  (($mascota->idUsuario == $usuario->id) || Login::hasPrivilege(500)){
                     
-                    
+            if (Login::hasPrivilege(500) || Login::get() && $mascota->idUsuario == Login::get()->id ) {
                     echo   "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
                     echo "- <a href='/mascota/delete/$mascota->id'>Borrar</a>";
                     

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="${encoding}">
 		<link rel="stylesheet" type="text/css" href="../../css/estilo.css">
-		<title>Insert title here</title>
+		<title>Lista de mascotas</title>
 	</head>
 	<body>
 	    <?php 
@@ -37,19 +37,20 @@
                  echo "<td>";
                  echo " <a href='/mascota/show/$mascota->id'>Ver</a>";
             
-                 if(!empty($usuario)){
-                   if  (Login::hasPrivilege(500) || ($mascota->idUsuario == Login::get()->id)) {                    
-                    
-                       echo "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
-                       echo "- <a href='/mascota/delete/$mascota->id'>Borrar</a>";
-                    
-                     } 
-                   }
+                  
+             
+                  if (Login::hasPrivilege(500) || Login::get() && $mascota->idUsuario == Login::get()->id ) {               
+                
+                    echo "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
+                    echo "- <a href='/mascota/delete/$mascota->id'>Borrar</a>";
+                  }
+                     
+                 
             echo "</td>";
             echo "</tr>";
                
     }?>
 </table>
-      <?php Basic::footer();?>
+      <?php (TEMPLATE)::footer();?>
 </body>
 </html>

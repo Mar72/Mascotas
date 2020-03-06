@@ -52,7 +52,8 @@ class MascotaController{
     public function create(){
         
         $usuario= Login::get();
-        if (empty($usuario) || Login::isAdmin())
+                          
+        if (empty($usuario) || Login::isAdmin() )
             throw new Exception ("No estás registrado para subir una mascota");
         
         $razas = Raza::getRazaTipo();

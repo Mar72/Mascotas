@@ -22,17 +22,17 @@
         <p><b>idRaza:</b> <?=$mascota->idRaza?></p>
 
 <?php  
-    if(sizeof($fotos)>0) {
-            foreach($fotos as $foto){?>  
+    if(sizeof($fotos)>0) {?> 
+            <p><b>id mascota:</b><?=$fotos[0]->idmascota?></p> 
+            <?php foreach($fotos as $foto){?>  
                 <figure class="portada">
-	             <?php echo "<img height='100' src='/$foto->fichero' alt='foto'>";
-	                   echo "Foto $foto->fichero <a href='/foto/delete/$foto->id'>Borrar</a>";
+	             <?php echo "<img height='200' width='200' src='/$foto->fichero' alt='foto'>";
+	                   echo "$foto->ubicacion <a href='/foto/delete/$foto->id'>Borrar</a>";
 	                   
                  ?>   
-	           </figure>
+	           </figure>       
                
-              <p><b>Ubicacion:</b><?=$foto->ubicacion?></p> 
-              <p><b>id mascota:</b><?=$foto->idmascota?></p>          
+                       
         <?php  } 
     } else echo "Sin fotos";?>
         
