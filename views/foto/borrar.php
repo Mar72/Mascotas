@@ -5,6 +5,10 @@
 		<title>Borrar foto de mascota</title>
 	</head>
 	<body>
+	    <?php 
+	       (TEMPLATE)::header("Mascotas");
+	       (TEMPLATE)::nav();
+	       (TEMPLATE)::login();?>
 		<h2>Confirmar borrado</h2>
 		
 		<p>Estás a punto de borrar la boto <?=$foto->id?> 

@@ -7,7 +7,7 @@
 		<title>Sube fotos mascota</title>
 	</head>
 	<body>
-	   <?php (TEMPLATE)::header("Usuarios");
+	   <?php (TEMPLATE)::header("Mascotas");
 	         (TEMPLATE)::nav();
 	         (TEMPLATE)::login();
 

@@ -7,7 +7,7 @@
 	</head>
 	<body>
 	    <?php 
-	    (TEMPLATE)::header(Usuarios);
+	    (TEMPLATE)::header("Mascota");
 	    (TEMPLATE)::nav();
 	    (TEMPLATE)::login();
 	    ?> 

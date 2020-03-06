@@ -20,8 +20,7 @@
         			<li><a href="/mascota/list">Ver mascotas</a>
                     <?php if(!empty($usuario) && !Login::isAdmin()) {?>         			
         			  <li><a href="/mascota/listUser/<?=$usuario->id?>">Ver sus mascotas</a>
-        			  <li><a href="/mascota/create">Añadir mascota</a>
-        			  
+        			  <li><a href="/mascota/create">Añadir mascota</a>      			  
         			<?php }?>  
         		</ul>
         		
