@@ -1,15 +1,23 @@
+body{
+	background-color: Azure;
+}
+h1{
+	text-align: center;
+}
 h1, h2, h3 {
 	color: brown;
 }
 
 table th {
-	background-color: bisque;
+	background-color: MintCream;
 }
 
 table tr:nth-of-type(odd) {
-	background-color: antiquewhite;
+	background-color: lightblue;
 }
-
+table tr:nth-of-type(even) {
+	background-color: LightSkyBlue;
+}
 p.error {
 	color: red;
 }
@@ -17,7 +25,14 @@ p.error {
 p.exito {
 	color: green;
 }
-
+label{
+	display: inline-block;
+	min-width: 80px;
+}
+input {
+	display: block;
+	margin: 2px; 
+}
 footer {
 	text-align: right;
 }
