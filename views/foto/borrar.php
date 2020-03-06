@@ -22,4 +22,5 @@
 		<br> 
 		<a href="/mascota/show/<?=$mascota->id?>">Volver a detalles de la mascota</a>      	
 	</body>
+	
 </html>
