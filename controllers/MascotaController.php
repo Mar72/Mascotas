@@ -156,13 +156,13 @@ class MascotaController{
       $mascota->id = intval($_POST['id']); //recfuperar el id vía POST
       
       //recuperar el resto de campos
-      $mascota->nombre = $_POST['nombre'];
-      $mascota->sexo = $_POST['sexo'];
-      $mascota->biografia = $_POST['biografia'];
+      $mascota->nombre = DB::escape($_POST['nombre']); 
+      $mascota->sexo = DB::escape($_POST['sexo']);
+      $mascota->biografia = DB::escape($_POST['biografia']);
       $mascota->fechaNacimiento = $_POST['fechaNacimiento'];
       $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
-      $mascota->idUsuario = $_POST['idUsuario'];
-      $mascota->idRaza = $_POST['idRaza'];
+      $mascota->idUsuario = intval($_POST['idUsuario']);
+      $mascota->idRaza = intval($_POST['idRaza']);
       
       // intenta realizar la actualizacion de datos
       if($mascota->actualizar()===false)

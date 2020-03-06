@@ -7,8 +7,10 @@
 	</head>
 	<body>
 	<?php 
-	    Basic::header();
-	    Basic::nav();?>
+    	(TEMPLATE)::header("Usuarios");
+    	(TEMPLATE)::nav();
+    	(TEMPLATE)::login();
+    	?>
 		<h2>Lista de mascotas de un usuario</h2>
 
 <table border="1">
@@ -48,6 +50,7 @@
                
     }?>
 </table>
-     <?php Basic::footer();?>
+     <?php 
+        (TEMPLATE)::footer();?>
 	</body>
 </html>

@@ -7,8 +7,11 @@
 	</head>
 	<body>
 	<?php 
-	    Basic::header();
-	    Basic::nav();?>
+	   (TEMPLATE)::header("Usuarios");
+	   (TEMPLATE)::nav();
+	   (TEMPLATE)::login();
+	   ?>
+	   
 		<h2>Confirmar borrado</h2>
 		
 		<form method="post" action="/mascota/destroy">
@@ -21,6 +24,7 @@
 		</form>
 		
 		<a href="/mascota/list">Volver al listado</a>
-	<?php Basic::footer();?>
+	<?php 
+	   (TEMPLATE)::footer();?>
 	</body>
 </html>

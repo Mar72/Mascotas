@@ -7,8 +7,10 @@
 	</head>
 	<body>
 	    <?php 
-	    Basic::header();
-	    Basic::nav();?>
+	        (TEMPLATE)::header("Usuarios");
+	        (TEMPLATE)::nav();
+	        (TEMPLATE)::login();
+	        ?>
        	<h2>Detalles de mascota</h2>
         <h3><?=$mascota->nombre?></h3>
         
@@ -38,6 +40,7 @@
         <a href="/mascota/edit<?=$mascota->id?>">Editar mascota</a> -
         <a href="/mascota/delete<?=$mascota->id?>">Borrar mascota</a> -
         <a href="/mascota/list">Lista de mascotas</a>
-        <?php Basic::footer();?>
+        <?php 
+            (TEMPLATE)::footer();?>
 	</body>
 </html>

@@ -7,8 +7,10 @@
 	</head>
 	<body>
 	    <?php 
-	    Basic::header();
-	    Basic::nav();?> 
+	    (TEMPLATE)::header(Usuarios);
+	    (TEMPLATE)::nav();
+	    (TEMPLATE)::login();
+	    ?> 
 		<h2>Nueva mascota</h2>
 		
 		<form method="post" action="/mascota/store" enctype="multipart/form-data">
@@ -37,6 +39,7 @@
 		</form>
 		
 		<a href="/mascota/list">Volver el listado</a>
-		<?php Basic::footer();?> 
+		<?php 
+		(TEMPLATE)::footer();?> 
 	</body>
 </html>

@@ -7,8 +7,9 @@
 		<title>Sube fotos mascota</title>
 	</head>
 	<body>
-	   <?php Basic::header();
-	    Basic::nav();
+	   <?php (TEMPLATE)::header("Usuarios");
+	         (TEMPLATE)::nav();
+	         (TEMPLATE)::login();
 
 	    ?>
 	   <form method="post" enctype="multipart/form-data" action="/mascota/storeFotos">
@@ -22,6 +23,6 @@
             <input type="button" id="menos" onclick="removeInput();" value="-" disabled="disabled"> --> 
             <input type="submit" name="enviar" value="Enviar">
        </form> 
-       <?php Basic::footer();?>     
+       <?php (TEMPLATE)::footer();?>     
 	</body>
 </html>

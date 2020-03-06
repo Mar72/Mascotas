@@ -7,8 +7,9 @@
 	</head>
 	<body>
 	<?php 
-	    Basic::header();
-	    Basic::nav();?>
+	       (TEMPLATE)::header("Usuarios");
+	       (TEMPLATE)::nav();
+	       (TEMPLATE)::login();?>
 	    
 		<h2>Formulario de edición</h2>
 		
@@ -36,6 +37,7 @@
 		<a href="/mascota/show/<?=$mascota->id?>">Detalles</a> - 
 		<a href="/mascota">Volvel al listado</a>
 		
-	<?php Basic::footer();?>
+	<?php 
+	       (TEMPLATE)::footer();?>
 	</body>
 </html>
