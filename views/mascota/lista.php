@@ -35,14 +35,14 @@
                  echo "<td>";
                  echo " <a href='/mascota/show/$mascota->id'>Ver</a>";
             
-                 // if(!empty($usuario)){
+                 if(!empty($usuario)){
                    if  (Login::hasPrivilege(500) || ($mascota->idUsuario == Login::get()->id)) {                    
                     
                        echo "- <a href='/mascota/edit/$mascota->id'>Actualizar</a>";
                        echo "- <a href='/mascota/delete/$mascota->id'>Borrar</a>";
                     
                      } 
-                  // }
+                   }
             echo "</td>";
             echo "</tr>";
                

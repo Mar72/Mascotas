@@ -11,7 +11,7 @@ class Foto{
   
   //recupera la mascota a la que pertenece la foto
   public function getMascota():?Mascota{
-	$consulta = "SELECT * FROM mascotas WHERE id=$this->idMascota";
+	$consulta = "SELECT * FROM mascotas WHERE id=$this->idmascota";
 	return DB::select($consulta,'Mascota');  
   }
   //nueva foto

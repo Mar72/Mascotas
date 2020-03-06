@@ -81,7 +81,9 @@ class MascotaController{
                   
             if(!$mascota->guardar()) //gaurda la mascota en BDD
                   throw new Exception("No se pudo guardar $mascota->nombre");
-            // $mascotaR = Mascota::getFiltered('nombre', DB::escape($_POST['nombre']));
+            
+            $mensaje="Guardado de mascota $mascota->nombre correcto.";
+            include 'views/exito.php'; // muestra la vista de éxito
             
     
 }

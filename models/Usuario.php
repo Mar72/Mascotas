@@ -45,7 +45,7 @@
                           '$this->usuario','$this->clave', '$this->nombre',
                           '$this->apellido1', '$this->apellido2',
                           '$this->email',$this->privilegio,$this->administrador,$this->bloqueado)";
-                          
+                                     
            return DB::insert($consulta); //conectar y ejecutar
        }
        

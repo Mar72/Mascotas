@@ -24,6 +24,8 @@
             foreach($fotos as $foto){?>  
                 <figure class="portada">
 	             <?php echo "<img height='100' src='/$foto->fichero' alt='foto'>";
+	                   echo "Foto $foto->fichero <a href='/foto/delete/$foto->id'>Borrar</a>";
+	                   
                  ?>   
 	           </figure>
                
