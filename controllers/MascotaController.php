@@ -35,7 +35,7 @@ class MascotaController{
     public function show(int $id=0){
         // comprobar que recibimos el id de mascota por parámetro 
         if(!$id)
-            throw new Exception("No se indicó la mascta.");
+            throw new Exception("No se indicó la mascota.");
         // recuperar la mascota con dicho código
         $mascota = Mascota::getMascota($id);
         
