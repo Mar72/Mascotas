@@ -11,7 +11,7 @@
     	(TEMPLATE)::nav();
     	(TEMPLATE)::login();
     	?>
-		<h2>Lista de mascotas de <?=$mascota->nombre?></h2> 
+		<h2>Lista de mascotas</h2> 
 
     <table border="1">
 	<tr>
