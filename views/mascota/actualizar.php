@@ -27,15 +27,15 @@
     		<input type="text" name="fechaNacimiento" value="<?=$mascota->fechaNacimiento?>"><br> 
     		<label>fechaFallecimiento</label>
     		<input type="text" name="fechaFallecimiento" value="<?=$mascota->fechaFallecimiento?>"><br> 
-    		<!-- <label>idUsuario</label>
-    		<input type="text" name="idUsuario" value="<?=$mascota->idUsuario?>"><br> 
-    		<label>idRaza</label>
-    		<input type="text" name="idRaza" value="<?=$mascota->idRaza?>"><br> --> 
+    		
+    		<input type="hidden" name="idUsuario" value="<?=$mascota->idUsuario?>"><br> 
+    		
+    		<input type="hidden" name="idRaza" value="<?=$mascota->idRaza?>"><br>  
     		<input type="submit" name="actualizar" value="Actualizar">
 		</form>
 		
 		<a href="/mascota/show/<?=$mascota->id?>">Detalles</a> - 
-		<a href="/mascota">Volvel al listado</a>
+		<a href="/mascota">Volver al listado</a>
 		
 	<?php 
 	       (TEMPLATE)::footer();?>

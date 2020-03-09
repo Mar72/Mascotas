@@ -40,10 +40,11 @@
         <?php  }?>  
            </div> 
     <?php } else echo "Sin fotos";
-    if (Login::get() && Login::get()->id==$mascota->idUsuario) {?>  
+
+    if (Login::get() && Login::get()->id==$mascota->idUsuario && !Login::hasPrivilege(500)) {?>    
         <a href="/foto/createFotos/<?=$mascota->id?>">Subir fotos</a>
      <?php }?>   
-    <?php if ((Login::get() && Login::get()->id=$mascota->idUsuario) ||
+    <?php if ((Login::get() && Login::get()->id==$mascota->idUsuario) || 
          Login::hasPrivilege(500)){?>     
         <a href="/mascota/edit/<?=$mascota->id?>">Editar mascota</a> - 
         <a href="/mascota/delete/<?=$mascota->id?>">Borrar mascota</a> -

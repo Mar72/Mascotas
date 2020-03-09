@@ -12,7 +12,7 @@
     	(TEMPLATE)::login();
     	?>
 		<h2>Lista de mascotas</h2> 
-
+    <?php if (sizeof($mascotas)>0){?>
     <table border="1">
 	<tr>
 		<th>Nombre</th>
@@ -24,7 +24,7 @@
 		<th>idRaza</th>
 		<th>Operaciones</th>
     </tr>
-    <?php if (sizeof($mascotas)>0){?> 
+     
     <?php foreach($mascotas as $mascota){
             echo "<tr>";
             echo "<td>$mascota->nombre</td>";  

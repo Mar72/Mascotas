@@ -99,9 +99,10 @@ class MascotaController{
      // recuperar la mascota con dicho identificador
      $mascota=Mascota::getMascota($id);
   
-     //restringue el acceso
-     if (!Login::get() || Login::get()->id!= $mascota->idUsuario)
-         throw new Exception ("No tienes permitida esta operación.");
+     // if (!Login::hasPrivilege(500) && (!Login::get() && Login::get()->id!= $mascota->idUsuario) 
+     //     || !Login::hasPrivilege(500))
+      if    (!Login::get() && Login::get()->id!=$mascota->idUsuario) 
+         throw new Exception ("No tienes permitida la edición de esta mascota.");
      
      // comprueba eue la mascota se pudo recuperar de la BDD
      if(!$mascota)
@@ -113,7 +114,7 @@ class MascotaController{
   //PASO 2: aplica los cambios a mascota
   public function update(){
       
-      //comprueba wue llegue el formulario con los datos
+      //comprueba que llegue el formulario con los datos 
       if(empty($_POST['actualizar']))
           throw new Exception('No se recibieron datos');
       
