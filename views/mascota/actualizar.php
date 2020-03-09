@@ -11,7 +11,7 @@
 	       (TEMPLATE)::nav();
 	       (TEMPLATE)::login();?>
 	    
-		<h2>Formulario de edición</h2>
+		<h2>Formulario de actualización mascotas</h2>
 		
 		<?=empty($GLOBALS['mensaje'])?"": "<p>". $GLOBALS['mensaje']."</p>"?>
 		
@@ -27,10 +27,10 @@
     		<input type="text" name="fechaNacimiento" value="<?=$mascota->fechaNacimiento?>"><br> 
     		<label>fechaFallecimiento</label>
     		<input type="text" name="fechaFallecimiento" value="<?=$mascota->fechaFallecimiento?>"><br> 
-    		<label>idUsuario</label>
+    		<!-- <label>idUsuario</label>
     		<input type="text" name="idUsuario" value="<?=$mascota->idUsuario?>"><br> 
     		<label>idRaza</label>
-    		<input type="text" name="idRaza" value="<?=$mascota->idRaza?>"><br> 
+    		<input type="text" name="idRaza" value="<?=$mascota->idRaza?>"><br> --> 
     		<input type="submit" name="actualizar" value="Actualizar">
 		</form>
 		

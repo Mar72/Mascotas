@@ -18,27 +18,37 @@
         <p><b>Biografia:</b> <?=$mascota->biografia?></p>
         <p><b>FechaNacimiento:</b> <?=$mascota->fechaNacimiento?></p>
         <p><b>FecahFallecimiento:</b> <?=$mascota->fechaFallecimiento?></p>
-        <p><b>idUsuario:</b> <?=$mascota->idUsuario?></p>
-        <p><b>idRaza:</b> <?=$mascota->idRaza?></p>
+        <p><b>Usuario:</b> <?=$mascota->nUsuario?></p> 
+        <p><b>Raza:</b> <?=$mascota->nRaza?></p> 
+        <p><b>Tipo:</b> <?=$mascota->nTipo?></p> 
 
 <?php  
     if(sizeof($fotos)>0) {?> 
-            <p><b>id mascota:</b><?=$fotos[0]->idmascota?></p> 
+            <p><b>idmascota:</b><?=$fotos[0]->idmascota?></p> 
+            <div class="flex-container">
             <?php foreach($fotos as $foto){?>  
-                <figure class="portada">
+                <figure class="flex1">
 	             <?php echo "<img height='200' width='200' src='/$foto->fichero' alt='foto'>";
-	                   echo "$foto->ubicacion <a href='/foto/delete/$foto->id'>Borrar</a>";
+	                   if ((Login::get() && Login::get()->id=$mascota->idUsuario) ||
+	                       Login::hasPrivilege(500))
+	                           echo "<a href='/foto/delete/$foto->id'>Borrar</a>";
 	                   
                  ?>   
-	           </figure>       
-               
+                 <figcaption><?=$foto->ubicacion?></figcaption> 
+	           </figure>                     
                        
-        <?php  } 
-    } else echo "Sin fotos";?>
-        
-        <a href="/mascota/createFotos/<?=$mascota->id?>">Subir fotos</a>
-        <a href="/mascota/edit<?=$mascota->id?>">Editar mascota</a> -
-        <a href="/mascota/delete<?=$mascota->id?>">Borrar mascota</a> -
+        <?php  }?>  
+           </div> 
+    <?php } else echo "Sin fotos";
+    if (Login::get() && Login::get()->id=$mascota->idUsuario) {?>  
+        <a href="/foto/createFotos/<?=$mascota->id?>">Subir fotos</a>
+     <?php }?>   
+    <?php if ((Login::get() && Login::get()->id=$mascota->idUsuario) ||
+         Login::hasPrivilege(500)){?>     
+        <a href="/mascota/edit/<?=$mascota->id?>">Editar mascota</a> - 
+        <a href="/mascota/delete/<?=$mascota->id?>">Borrar mascota</a> -
+    <?php }?>     
+   
         <a href="/mascota/list">Lista de mascotas</a>
         <?php 
             (TEMPLATE)::footer();?>

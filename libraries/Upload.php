@@ -37,7 +37,7 @@
         
         public static function procesar(
             array $file, string $folder, bool $unique=true, int $max=0, string $mime='.'):string{
-        
+    
             // comprobar que no se ha producido un error en la subida
             if($e = $file['error'])
                 throw new Exception("Error en la subida del fichero con código $e");
@@ -64,7 +64,7 @@
             $ruta = $unique ?
                 $ruta = $folder."/".self::nombreUnico(pathinfo($file['name'], PATHINFO_EXTENSION)):
                 $ruta = $folder."/".$file['name'];
-                        
+                         
             // MOVER EL FICHERO A DESTINO
             if(!move_uploaded_file($rutaTmp, $ruta)) 
                 throw new Exception("Error al mover de $rutaTmp a $ruta");

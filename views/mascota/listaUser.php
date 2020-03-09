@@ -11,9 +11,9 @@
     	(TEMPLATE)::nav();
     	(TEMPLATE)::login();
     	?>
-		<h2>Lista de mascotas de un usuario</h2>
+		<h2>Lista de mascotas de <?=$mascota.nombre?></h2> 
 
-<table border="1">
+    <table border="1">
 	<tr>
 		<th>Nombre</th>
 		<th>sexo</th>
@@ -24,6 +24,7 @@
 		<th>idRaza</th>
 		<th>Operaciones</th>
     </tr>
+    <?php if (sizeof($mascotas)>0){?> 
     <?php foreach($mascotas as $mascota){
             echo "<tr>";
             echo "<td>$mascota->nombre</td>";  
@@ -46,8 +47,22 @@
             echo "</td>";
             echo "</tr>";
                
-    }?>
-</table>
+      }?>
+      </table>
+      <!--   ver fotos de mascotas -->
+      <div class="flex-container">    
+      <?php foreach($fotos as $foto){?> 
+        <figure class="flex1">
+        <?php echo "<img height='200' width='200' src='/$foto->fichero' alt='foto'>";
+              echo "<a href='/foto/delete/$foto->id'>Borrar</a>";
+        ?>
+             <figcaption><?=$foto->nombre?> - <?=$foto->ubicacion?></figcaption> 
+	    </figure>
+	      
+      <?php }?>
+      </div>
+      <?php } 
+     else echo "No tiene mascotas subidas";?> 
      <?php 
         (TEMPLATE)::footer();?>
 	</body>

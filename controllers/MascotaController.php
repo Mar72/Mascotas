@@ -23,9 +23,10 @@ class MascotaController{
         $usuario = Login::get();
 
         if(!empty($usuario)&&($usuario->id!=$idu))
-            throw new Exception ('No estas registrado para ver tus mascotas');
+            throw new Exception ('No estás registrado para ver tus mascotas');
         // recuperar la lista de mascotas
-        $mascotas = Mascota::getUser($idu);        
+        $mascotas = Mascota::getUser($idu);
+        $fotos = Mascota::getMascotasUser($idu);
         
         //cargar la vista que muesta el listado
         include 'views/mascota/listaUser.php';
@@ -35,7 +36,7 @@ class MascotaController{
     public function show(int $id=0){
         // comprobar que recibimos el id de mascota por parámetro 
         if(!$id)
-            throw new Exception("No se indicó la mascota.");
+            throw new Exception("No se indicó la mascta.");
         // recuperar la mascota con dicho código
         $mascota = Mascota::getMascota($id);
         
@@ -88,60 +89,26 @@ class MascotaController{
             
     
 }
-  public function createFotos($idm){ 
-   
-    //$usuario= Login::get();
-    $mascota = Mascota::getMascota($idm); 
-    // if (empty($usuario) || Login::hasPrivilege(500))
-    //    throw new Exception ("No estás registrado para subir fotos");
-    
-    if ($mascota->idUsuario!=Login::get()->id)
-        throw new Exception ("No tienes permiso para subir fotos");    
-        
-        include 'views/mascota/addFotos.php'; 
-  }
-
-  public function storeFotos(){   //Sube fotos para mascota id
-    $idm = intval($_POST['idmascota']);
-    $mascota = Mascota::getMascota($idm); 
-    $usuario=Login::get();
-
-    if ($mascota->idUsuario!=$usuario->id) 
-         throw new Exception ("No tienes permiso para subir fotos");
-    if(!empty($_POST['enviar'])){ 
-         $foto = new Foto(); //crea una nueva foto
-         $foto->ubicacion=DB::escape($_POST['ubicacion']);
-         $foto->idmascota=$mascota->id;
-        
-        //  para subir la imagen
-         foreach($_FILES as $fichero){
-
-           if(Upload::llegaFichero('imagen'))
-           $foto->fichero = Upload::procesar($_FILES['imagen'], 'imagen/mascotas', true, 0, 'image/*');
-            
-           if(!$foto->guardar()) //guarda la foto en BDD
-              throw new Exception("No se pudo guardar $foto->fichero");
-         }
-                        }
-        $mensaje="Guardado de fotos de mascota $mascota->nombre.";
-        include 'views/exito.php'; // muestra la vista de éxito
-  }
-  // ACTUALIZAR SE HACE EN DOS PASOS
+    // ACTUALIZAR SE HACE EN DOS PASOS
   // PASO 1: muestra e formulario de edicón de una mascota
   public function edit(int $id=0){
       // comprobar que llega el id de mascota a editar
       if(!$id)
           throw new Exception("No se indicó la mascota.");
-          
-          // recuperar la mascota con dicho identificador
-          $mascota=Mascota::getMascota($id);
-          
-          // comprueba eue la mascota se pudo recuperar de la BDD
-          if(!$mascota)
-              throw new Exception("No exite la mascota $id.");
+      
+     // recuperar la mascota con dicho identificador
+     $mascota=Mascota::getMascota($id);
+  
+     //restringue el acceso
+     if (!Login::get() || Login::get()->id!= $mascota->idUsuario)
+         throw new Exception ("No tienes permitida esta operación.");
+     
+     // comprueba eue la mascota se pudo recuperar de la BDD
+     if(!$mascota)
+          throw new Exception("No exite la mascota $id.");
               
-              // carga la vistade formulario
-              include 'views/mascota/actualizar.php';
+     // carga la vistade formulario
+     include 'views/mascota/actualizar.php';
   }
   //PASO 2: aplica los cambios a mascota
   public function update(){

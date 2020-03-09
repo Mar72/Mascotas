@@ -14,7 +14,12 @@ class Mascota {
     
     // recuperar una mascota concreta por id
     public static function getMascota(int $id): ?Mascota  {
-        $consulta = "SELECT * FROM mascotas WHERE id=$id"; // preprara la consulta
+        $consulta = "SELECT m.*,u.nombre as nUsuario, 
+                     r.nombre as nRaza, t.nombre as nTipo  
+                     FROM mascotas m INNER JOIN usuarios u 
+                     INNER JOIN razas r INNER JOIN tipos t 
+                     WHERE m.id=$id AND m.idusuario=u.id 
+                     AND m.idRaza=r.id AND r.idTipo=t.id"; // preprara la consulta
         return DB::select($consulta, self::class); // ejecutar y retornar el resultado
     }
     public static function getFotos($idm):array{
@@ -27,10 +32,17 @@ class Mascota {
         $consulta= "SELECT u.nombre, u.apellido1, u.apellido2, m.* 
                     FROM usuarios u INNER JOIN mascotas m
                     WHERE u.id=m.idUsuario AND u.id=$idu";
-echo $consulta;        
        return DB::selectAll($consulta, self::class);
     }
 
+    public static function getMascotasUSer($idu):?array{
+        $consulta="SELECT u.nombre, u.apellido1,u.apellido2,
+                   m.*,f.id, f.fichero,f.ubicacion, f.idmascota
+                   FROM usuarios u INNER JOIN mascotas m 
+                   INNER JOIN fotos f
+                   WHERE u.id=$idu AND u.id=m.idUsuario AND m.id=f.idmascota";
+        return DB::selectAll($consulta, self::class); 
+    }
     public function guardar()
     { // insertar una nueva mascota
         if (empty($this->fechaFallecimiento)) {

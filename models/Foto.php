@@ -18,7 +18,7 @@ class Foto{
   public function guardar(){
      $consulta="INSERT INTO fotos (fichero, ubicacion,idmascota)
                 VALUES ('$this->fichero','$this->ubicacion',$this->idmascota)";
- 
+
      return DB::insert($consulta);           
   }
   //borrar foto
