@@ -59,7 +59,7 @@ class Mascota {
                                '$this->fechaNacimiento', '$this->fechaFallecimiento', 
                                 $this->idUsuario, $this->idRaza)";
         }
-    
+ 
         return DB::insert($consulta, self::class);
     }
 

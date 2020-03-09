@@ -40,7 +40,7 @@
         <?php  }?>  
            </div> 
     <?php } else echo "Sin fotos";
-    if (Login::get() && Login::get()->id=$mascota->idUsuario) {?>  
+    if (Login::get() && Login::get()->id==$mascota->idUsuario) {?>  
         <a href="/foto/createFotos/<?=$mascota->id?>">Subir fotos</a>
      <?php }?>   
     <?php if ((Login::get() && Login::get()->id=$mascota->idUsuario) ||

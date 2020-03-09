@@ -78,7 +78,7 @@ class MascotaController{
             $mascota->fechaNacimiento = $_POST['fechaNacimiento']; 
             $mascota->fechaFallecimiento = $_POST['fechaFallecimiento'];
             if (Login::hasPrivilege(500)) $mascota=intval($_POST['idUsuario']); 
-            else  $mascota->idUsuario = Login::get()->id;
+            else $mascota->idUsuario = Login::get()->id;
             $mascota->idRaza = intval($_POST['razaTipo']);                            
                   
             if(!$mascota->guardar()) //gaurda la mascota en BDD
